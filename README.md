@@ -17,10 +17,13 @@ The original author implemented the code using the yolov3 detector.
 In the run() method, I add processes that access information using the yolov5 detector, process images for my purposes,
 and stores the information in a database
 
+./db_querier.py: used to access the results stored in bbox_with_colors.db. Try running: python db_querier.py --id 10
+./create_color_db.py: used to convert bbox_wirth_colors.db to database with rgb-labeled information
+
 
 Files that I did not write:
-./detector: the yolov5 detection algorithm implemented by Ultralytics (https://github.com/ultralytics/yolov5)
-./detect.py: main method for accessing the yolov5 detector
+./edge_model.yml: used to implement the edge detection step
+
 ./models: contains yolov5 neural network models
 ./utils: utility functions for the yolov5 detector
 
@@ -33,4 +36,12 @@ Other files came with the original repo and are irrelavant for this project
 To get the code running, required libraries need to be installed via pip or conda. These specifications can be found in
 requirements.txt and tracking_requirements.txt
 
+weights/yolov5s.pt is a neural network used to implement the object detection step
 
+try running: python yolov5_deepsort_db.py <path to frames of the video>
+
+This will generate a .db file that contains all bbox and color information
+
+try running: cureate_color_db.py
+
+THis will convert the bbox and color information to a reader-friendly db with color labels
