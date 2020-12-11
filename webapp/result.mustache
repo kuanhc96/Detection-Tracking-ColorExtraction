@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html>
+  <head>
+    <title>Result</title>
+    <link type="text/css" rel="stylesheet" href="table.css" />
+  </head>
+  <body>
+
+    <div style="margin-left:275px;margin-right:auto;display:inline-block;box-shadow: 10px 10px 5px #888888;border:1px solid #000000;-moz-border-radius-bottomleft:9px;-webkit-border-bottom-left-radius:9px;border-bottom-left-radius:9px;-moz-border-radius-bottomright:9px;-webkit-border-bottom-right-radius:9px;border-bottom-right-radius:9px;-moz-border-radius-topright:9px;-webkit-border-top-right-radius:9px;border-top-right-radius:9px;-moz-border-radius-topleft:9px;-webkit-border-top-left-radius:9px;border-top-left-radius:9px;background:white">
+      &nbsp;Get position and color info for person ID {{id}} in image {{frame_id}}&nbsp;</div>
+    <p style="bottom-margin:10px">
+      <table class="CSS_Table_Example" style="width:100%;margin:auto;">
+        <tr><td>Id</td><td>Frame</td><td>x1</td><td>y1</td><td>x2</td><td>y2</td><td>R</td><td>G</td><td>B</td><td>Color</td></tr>
+	<tr><td>{{id}}</td><td>{{frame_id}}</td><td>{{xl}}</td><td>{{yl}}</td><td>{{xr}}</td>
+        <td>{{yr}}</td><td>{{red}}</td><td>{{blue}}</td><td>{{green}}</td><td>{{color}}</td>></tr>
+
+    </table>
+    <div style="margin-left:275px;
+    margin-right:auto;
+    display:inline-block;
+    box-shadow: 10px 10px 5px #888888;border:1px solid #000000;
+    -moz-border-radius-bottomleft:9px;
+    -webkit-border-bottom-left-radius:9px;
+    border-bottom-left-radius:9px;-moz-border-radius-bottomright:9px;
+    -webkit-border-bottom-right-radius:9px;
+    border-bottom-right-radius:9px;-moz-border-radius-topright:9px;
+    -webkit-border-top-right-radius:9px;
+    border-top-right-radius:9px;-moz-border-radius-topleft:9px;-webkit-border-top-left-radius:9px;border-top-left-radius:9px;background:white">
+        &nbsp; Frame {{frame_id}}&nbsp;</div>
+    <img id="currentImage" src={{image}} alt="PersonNotFound" width="960" height="540">
+    <canvas id="bbox" width="960" height="540">Canvas not supported</canvas>
+
+    <div style="margin-left:150px;margin-right:auto;display:inline-block;box-shadow: 10px 10px 5px #888888;border:1px solid #000000;-moz-border-radius-bottomleft:9px;-webkit-border-bottom-left-radius:9px;border-bottom-left-radius:9px;-moz-border-radius-bottomright:9px;-webkit-border-bottom-right-radius:9px;border-bottom-right-radius:9px;-moz-border-radius-topright:9px;-webkit-border-top-right-radius:9px;border-top-right-radius:9px;-moz-border-radius-topleft:9px;-webkit-border-top-left-radius:9px;border-top-left-radius:9px;background:white">
+        &nbsp;Person {{id}}&nbsp;</div>
+    <canvas id="cropped" width="960" height="540">Canvas not supported</canvas>
+
+    <script>
+        window.onload = function () {
+            var image = document.querySelector('img');
+            var c = document.getElementById("bbox");
+            c.style.position = "absolute";
+            c.style.left = image.offsetLeft;
+            c.style.top = image.offsetTop;
+            var ctxBbox = c.getContext('2d');
+            ctxBbox.beginPath();
+            ctxBbox.lineWidth = "6";
+            ctxBbox.strokeStyle = "red";
+            const xl = {{xl}};
+            const yl = {{yl}};
+            const w = {{width}};
+            const h = {{height}}
+            ctxBbox.rect(xl/2, yl/2, w/2, h/2);
+            ctxBbox.stroke();
+
+            var canvas = document.getElementById('cropped');
+            var ctx = canvas.getContext('2d');
+            ctx.drawImage(
+                    image,
+                {{xl}}, {{yl}},
+                {{width}}, {{height}},
+                    0, 0,
+                {{width}}, {{height}}
+            );
+        }
+
+
+    </script>
+
+    </p>
+
+</body></html>
